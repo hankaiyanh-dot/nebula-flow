@@ -1,0 +1,190 @@
+{
+  "contentrating": "Everyone",
+  "description": "Six continuously flowing particle scenes, comet trails and optional mouse/audio interaction. Offline web wallpaper. 六种流动粒子场景、尾焰与可选互动。",
+  "file": "index.html",
+  "general": {
+    "properties": {
+      "audio": {
+        "order": 14,
+        "text": "柔和音频响应 / Gentle audio response",
+        "type": "bool",
+        "value": false
+      },
+      "brightness": {
+        "max": 140,
+        "min": 30,
+        "order": 5,
+        "step": 1,
+        "text": "画面亮度 / Brightness",
+        "type": "slider",
+        "value": 100
+      },
+      "color": {
+        "order": 11,
+        "text": "星点颜色 / Star color",
+        "type": "color",
+        "value": "0.3 0.8 1"
+      },
+      "customcolor": {
+        "order": 10,
+        "text": "自定义色 / Use custom hue",
+        "type": "bool",
+        "value": false
+      },
+      "density": {
+        "max": 160,
+        "min": 50,
+        "order": 3,
+        "step": 1,
+        "text": "粒子密度 / Particle density",
+        "type": "slider",
+        "value": 100
+      },
+      "interactive": {
+        "order": 12,
+        "text": "鼠标拨开 / Mouse interaction",
+        "type": "bool",
+        "value": true
+      },
+      "palette": {
+        "options": [
+          {
+            "label": "跟随场景 / Scene colors",
+            "value": "auto"
+          },
+          {
+            "label": "极光蓝 / Ice",
+            "value": "ice"
+          },
+          {
+            "label": "星云紫 / Purple",
+            "value": "purple"
+          },
+          {
+            "label": "星辉金 / Gold",
+            "value": "gold"
+          }
+        ],
+        "order": 9,
+        "text": "配色 / Palette",
+        "type": "combo",
+        "value": "auto"
+      },
+      "parallax": {
+        "order": 13,
+        "text": "轻微视差 / Subtle parallax",
+        "type": "bool",
+        "value": false
+      },
+      "quality": {
+        "options": [
+          {
+            "label": "自动适配 / Automatic",
+            "value": "auto"
+          },
+          {
+            "label": "原生清晰 / Native detail",
+            "value": "high"
+          },
+          {
+            "label": "省电兼容 / Low power",
+            "value": "low"
+          }
+        ],
+        "order": 8,
+        "text": "画质 / Quality",
+        "type": "combo",
+        "value": "auto"
+      },
+      "renderscale": {
+        "max": 150,
+        "min": 50,
+        "order": 7,
+        "step": 1,
+        "text": "渲染比例 / Render scale",
+        "type": "slider",
+        "value": 100
+      },
+      "scene": {
+        "options": [
+          {
+            "label": "自然星云 / Nebula",
+            "value": "nebula"
+          },
+          {
+            "label": "极光长流 / Aurora",
+            "value": "aurora"
+          },
+          {
+            "label": "深空尘埃 / Deep space",
+            "value": "deep"
+          },
+          {
+            "label": "星环轨道 / Orbit",
+            "value": "orbit"
+          },
+          {
+            "label": "旋涡风暴 / Vortex",
+            "value": "vortex"
+          },
+          {
+            "label": "超新星 / Supernova",
+            "value": "nova"
+          }
+        ],
+        "order": 0,
+        "text": "场景 / Scene",
+        "type": "combo",
+        "value": "nebula"
+      },
+      "showui": {
+        "order": 15,
+        "text": "显示玻璃控制栏 / Show glass controls",
+        "type": "bool",
+        "value": false
+      },
+      "speed": {
+        "max": 170,
+        "min": 30,
+        "order": 2,
+        "step": 1,
+        "text": "流动速度 / Flow speed",
+        "type": "slider",
+        "value": 100
+      },
+      "strength": {
+        "max": 200,
+        "min": 0,
+        "order": 6,
+        "step": 1,
+        "text": "拨开强度 / Brush strength",
+        "type": "slider",
+        "value": 100
+      },
+      "tour": {
+        "order": 1,
+        "text": "自动巡演 / Scene tour",
+        "type": "bool",
+        "value": false
+      },
+      "trail": {
+        "max": 100,
+        "min": 0,
+        "order": 4,
+        "step": 1,
+        "text": "尾焰长度 / Comet trails",
+        "type": "slider",
+        "value": 78
+      }
+    },
+    "supportsaudioprocessing": true
+  },
+  "preview": "preview.jpg",
+  "supportsaudioprocessing": true,
+  "tags": [
+    "Abstract"
+  ],
+  "title": "星云流 Nebula Flow · v1.5.0",
+  "type": "web",
+  "visibility": "private"
+}

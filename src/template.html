@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5">
+<meta name="theme-color" content="#050a16">
+<meta name="description" content="星云流 v1.5.0 · 单文件交互式粒子星空，无外部依赖。">
+<title>星云流 v1.5.0 · Nebula Flow</title>
+<!--STYLE-->
+</head>
+<body>
+<div id="ambient" aria-hidden="true"></div>
+<canvas id="view" tabindex="-1" aria-label="星云粒子交互画面"></canvas>
+<div id="touchLayer" aria-hidden="true"></div>
+<div class="top"><button type="button" class="pill" id="menuBtn" aria-label="展开控制" aria-controls="controls mask" aria-expanded="false">✦</button></div>
+<div id="controls" class="controls hidden" aria-label="星云控制">
+<div class="control-head"><div class="brand"><div class="logo" aria-hidden="true"></div><div><div class="name">星云流 <span class="version">v1.5.0</span></div><div class="tag">NEBULA FLOW</div></div></div><button type="button" class="pill" id="pauseBtn" aria-label="暂停动画">Ⅱ</button></div>
+<div id="status"><div id="fpsStatus">初始化中…</div><div id="coverageStatus" class="substatus">Canvas 2D</div></div>
+<div class="bottom"><div class="glass-dock" aria-label="主操作栏">
+<button type="button" class="primary accent scene-select" id="examplesBtn" aria-label="打开六个示例场景"><span class="dock-glyph">✦</span><span class="dock-current"><small>场景</small><strong id="currentScene">自然星云</strong></span><span class="chevron">›</span></button>
+<button type="button" class="primary tour-dock" id="tourBtn" aria-label="自动巡演">▶ 巡演</button>
+<button type="button" class="primary pulse-dock" id="pulseBtn" aria-label="能量脉冲">✺</button>
+</div></div>
+<button type="button" id="settingsBtn" class="settings-entry">设置与工具 <span aria-hidden="true">›</span></button>
+<div class="progress" id="tourProgress" aria-hidden="true"></div>
+</div>
+<div id="copy" class="center-copy"><div class="eyebrow">INTERACTIVE PARTICLE UNIVERSE</div><div class="hero">NEBULA</div><div class="hint">静置亦流动 · 轻触星光 · 滑动拨开星河</div></div>
+<div id="fallbackText" class="no-canvas hidden">此浏览器暂不支持 Canvas 动画。<br>示例与设置仍可打开；请尝试更新浏览器。</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="mask" aria-hidden="true"><div class="drawer" role="dialog" aria-modal="false" aria-labelledby="drawerTitle"><div class="drawer-head"><h2 id="drawerTitle">选择一个宇宙</h2><button type="button" class="iconbtn" id="closeDrawer" aria-label="关闭">×</button></div>
+<div id="examplesPane"><p>选择场景。星点沿新轨道柔和迁移，不会清屏。</p><div class="example-grid" id="exampleGrid">
+<button type="button" class="tile" data-scene="nebula" style="--c1:rgba(0,195,238,.5);--c2:#5ed8ff"><strong>✦ 自然星云</strong><small>均匀流动 · 星点分明</small></button>
+<button type="button" class="tile" data-scene="aurora" style="--c1:rgba(29,244,178,.36);--c2:#61fed4"><strong>◈ 极光长流</strong><small>极光丝带 · 青绿波动</small></button>
+<button type="button" class="tile" data-scene="deep" style="--c1:rgba(59,109,239,.40);--c2:#8597ff"><strong>✧ 深空尘埃</strong><small>遥远星海 · 宁静呼吸</small></button>
+<button type="button" class="tile" data-scene="orbit" style="--c1:rgba(164,94,244,.46);--c2:#d6a5ff"><strong>◎ 星环轨道</strong><small>星环弧线 · 旋转运动</small></button>
+<button type="button" class="tile" data-scene="vortex" style="--c1:rgba(63,120,238,.51);--c2:#9cbbff"><strong>◉ 旋涡风暴</strong><small>螺旋涡流 · 层次分明</small></button>
+<button type="button" class="tile" data-scene="nova" style="--c1:rgba(245,118,74,.49);--c2:#ffe0a0"><strong>✹ 超新星</strong><small>琥珀光束 · 爆发扩散</small></button>
+</div><div class="button-row"><button type="button" id="randomBtn">🎲 随机场景</button><button type="button" id="drawerTourBtn">▶ 自动巡演</button><button type="button" id="drawerSettingsBtn">⚙ 高级设置</button></div></div>
+<div id="settingsPane" class="hidden"><p>简洁、流畅、兼容。仅保留必要的画面选项。</p>
+<h3>视觉与性能</h3>
+<div class="settings-line"><div><label for="density">粒子密度</label><small>可见星点数量，不会因拖尾积累成一团</small></div><input id="density" type="range" min="50" max="160" step="10" value="100"></div>
+<div class="settings-line"><div><label for="speed">流动速度</label><small>调整星云运动速度</small></div><input id="speed" type="range" min="30" max="170" step="10" value="100"></div>
+<div class="settings-line"><div><label for="quality">画质档位</label><small>老设备可选择省电；自动按绘制负载调整清晰度</small></div><select id="quality"><option value="auto">自动适配</option><option value="high">高清</option><option value="low">省电兼容</option></select></div>
+<div class="settings-line"><div><label for="palette">配色主题</label><small>独立于场景，支持冷暖色调</small></div><select id="palette"><option value="auto">跟随场景</option><option value="ice">极光蓝</option><option value="purple">星云紫</option><option value="gold">星辉金</option></select></div>
+<details class="advanced"><summary>更多选项 <span>拖尾 · 点击反馈 · 性能信息</span></summary><div class="settings-line"><div><label for="trail">拖尾长度</label><small>保留彗星尾焰；省电档也有轻量拖尾</small></div><input id="trail" type="range" min="0" max="100" step="10" value="78"></div>
+<div class="settings-line"><div><label for="waves">点击反馈</label><small>轻点一圈光波，同时推动附近粒子</small></div><input id="waves" class="toggle" type="checkbox" checked></div>
+<div class="settings-line"><div><label for="hud">性能信息</label><small>展开右侧控制卡后显示 FPS 和分布覆盖率</small></div><input id="hud" class="toggle" type="checkbox" checked></div>
+</details><h3>实用工具</h3><div class="button-row"><button type="button" id="saveBtn">▣ 保存画面 PNG</button><button type="button" id="fullBtn">⛶ 全屏展示</button><button type="button" id="resetBtn">↻ 恢复默认</button><button type="button" id="settingsExamplesBtn">✦ 返回例子</button></div>
+<div id="help"><p><b>操作提示</b>：轻点松开产生光波，按住滑动可连续拨开粒子；按空格暂停，按 1～6 切换场景，按 Esc 关闭面板。</p><p><b>兼容说明</b>：只依赖 Canvas 2D 与基础 DOM（动画定时器可回退）；没有 WebGL、网络请求或第三方库。画质与性能取决于设备，已验证环境见随包说明。</p></div></div>
+</div></div>
+<!--ENGINE-->
+</body>
+</html>
