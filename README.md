@@ -2,6 +2,10 @@
 
 Six flowing particle universes. An offline, self-contained Canvas 2D artwork with comet tails, ripples and continuous drag repulsion.
 
+**Play online:** https://hankaiyanh-dot.github.io/nebula-flow/
+
+GitHub Pages is publicly available and tested at its HTTPS address. The itch.io project is currently a draft blocked by account email verification. The Wallpaper Engine Workshop upload is held pending final real desktop input acceptance. See `docs/RELEASE-STATUS.md`.
+
 六种持续流动的粒子宇宙：自然星云、极光长流、深空尘埃、星环轨道、旋涡风暴、超新星。轻点产生光波，按住拖动向路径两侧拨开星点。
 
 Open `index.html` in a browser. Expand the glass controls at the upper right to select a scene, adjust settings or enter fullscreen. Keyboard: 1–6 scenes, Space pause, Esc close controls. Touch devices support tap and swipe; physical mobile compatibility depends on the browser and device.
