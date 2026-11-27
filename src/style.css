@@ -47,3 +47,6 @@
 .stats-interaction strong{color:#e9f8ff;font-size:12px;font-variant-numeric:tabular-nums}
 .stats-privacy-note{margin-top:15px;padding:10px 11px;border:1px solid rgba(118,219,194,.18);border-radius:12px;background:rgba(84,190,158,.055);color:#b8e8dc;font-size:10px;line-height:1.7}
 @media(max-width:480px){.stats-performance{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-scene-row{grid-template-columns:66px minmax(0,1fr) 43px}.stats-grid{gap:7px}.stats-card{padding:10px}.stats-day-value{font-size:7px}}
+
+/* v1.6.0 analytics expansion */
+.stats-subheading{margin:12px 0 8px;font-size:10px;color:#a9bdcf}.stats-performance strong{font-variant-numeric:tabular-nums}.stats-scene-row{min-height:20px}
