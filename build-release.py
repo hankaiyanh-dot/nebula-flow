@@ -19,6 +19,6 @@ with zipfile.ZipFile(ROOT/'NebulaFlow_v1.6.0_itch.zip','w',zipfile.ZIP_DEFLATED)
 props=json.loads((ROOT/'wallpaper/project.json').read_text(encoding='utf-8'))['general']['properties']
 assert len(props)==16
 assert not re.search(r'(?:src|href)=["\']https?://',html)
-result={'version':'1.6.0','sharedCoreUnchanged':True, 'analytics':'local-only','nativeHTMLUnchanged':False,'nativeProperties':16,'webAndItchIdentical':True,'webSha256':sha(ROOT/'web/index.html'),'wallpaperSha256':sha(ROOT/'wallpaper/index.html'),'itchZipSha256':sha(ROOT/'NebulaFlow_v1.5.0_itch.zip')}
+result={'version':'1.6.0','coreModuleUnchanged':True, 'engineUpdated':True, 'analytics':'local-only','nativeHTMLUnchanged':False,'nativeProperties':16,'webAndItchIdentical':True,'webSha256':sha(ROOT/'web/index.html'),'wallpaperSha256':sha(ROOT/'wallpaper/index.html'),'itchZipSha256':sha(ROOT/'NebulaFlow_v1.6.0_itch.zip')}
 (ROOT/'evidence/build.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
 print(json.dumps(result))
