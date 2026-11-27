@@ -58,10 +58,11 @@
 </div>
 <div class="stats-section"><div class="stats-heading"><h3>场景偏好</h3><span>按累计活跃时间</span></div><div id="statsSceneRows" class="stats-scene-rows"></div></div>
 <div class="stats-section"><div class="stats-heading"><h3>近 7 日活跃</h3><span>本地日期</span></div><div id="statsWeekBars" class="stats-week-bars"></div></div>
-<div class="stats-section"><div class="stats-heading"><h3>实时渲染性能</h3><span>本地采样</span></div><div class="stats-performance">
-<div><small>当前 FPS</small><strong id="statsCurrentFps">—</strong></div><div><small>采样平均 FPS</small><strong id="statsAverageFps">—</strong></div>
-<div><small>平均绘制耗时</small><strong id="statsRenderMs">—</strong></div><div><small>平均模拟耗时</small><strong id="statsSimMs">—</strong></div>
-<div><small>当前粒子数</small><strong id="statsParticles">—</strong></div><div><small>画布分辨率</small><strong id="statsCanvasSize">—</strong></div>
+<div class="stats-section"><div class="stats-heading"><h3>粒子监控</h3><span>真实引擎采样 · 非估算</span></div><div class="stats-performance">
+<div><small>当前粒子数</small><strong id="statsParticles">—</strong></div><div><small>当前可见粒子</small><strong id="statsVisibleParticles">—</strong></div><div><small>历史粒子峰值</small><strong id="statsParticlePeak">—</strong></div><div><small>平均粒子数</small><strong id="statsParticleAverage">—</strong></div><div><small>累计创建粒子</small><strong id="statsParticlesCreated">—</strong></div><div><small>累计移除粒子</small><strong id="statsParticlesRemoved">—</strong></div>
+</div><div class="stats-subheading">各场景粒子峰值</div><div id="statsParticleSceneRows" class="stats-scene-rows"></div></div>
+<div class="stats-section"><div class="stats-heading"><h3>实时渲染性能</h3><span>最近 600 帧窗口 + 累计统计</span></div><div class="stats-performance">
+<div><small>当前 FPS</small><strong id="statsCurrentFps">—</strong></div><div><small>采样平均 FPS</small><strong id="statsAverageFps">—</strong></div><div><small>1% Low FPS</small><strong id="statsOneLow">—</strong></div><div><small>平均绘制耗时</small><strong id="statsRenderMs">—</strong></div><div><small>平均模拟耗时</small><strong id="statsSimMs">—</strong></div><div><small>平均帧时间</small><strong id="statsFrameAverage">—</strong></div><div><small>帧时间 P95</small><strong id="statsFrameP95">—</strong></div><div><small>帧时间 P99</small><strong id="statsFrameP99">—</strong></div><div><small>卡顿帧 (>33ms)</small><strong id="statsJank">—</strong></div><div><small>画布分辨率</small><strong id="statsCanvasSize">—</strong></div><div><small>设备 DPR</small><strong id="statsDpr">—</strong></div><div><small>Canvas 像素数</small><strong id="statsCanvasPixels">—</strong></div><div><small>背景星点数</small><strong id="statsBackgroundStars">—</strong></div>
 </div></div>
 <div class="stats-section"><div class="stats-heading"><h3>交互明细</h3><span>累计次数</span></div><div id="statsInteractionRows" class="stats-interactions"></div></div>
 <div id="statsPrivacyNote" class="stats-privacy-note">本地存储 · 无账号 · 无遥测 · 可随时导出或清空</div>
