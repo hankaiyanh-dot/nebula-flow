@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5">
 <meta name="theme-color" content="#050a16">
-<meta name="description" content="星云流 v1.5.0 · 单文件交互式粒子星空，无外部依赖。">
-<title>星云流 v1.5.0 · Nebula Flow</title>
+<meta name="description" content="星云流 v1.6.0 · 单文件交互式粒子星空，无外部依赖。">
+<title>星云流 v1.6.0 · Nebula Flow</title>
 <!--STYLE-->
 </head>
 <body>
@@ -14,7 +14,7 @@
 <div id="touchLayer" aria-hidden="true"></div>
 <div class="top"><button type="button" class="pill" id="menuBtn" aria-label="展开控制" aria-controls="controls mask" aria-expanded="false">✦</button></div>
 <div id="controls" class="controls hidden" aria-label="星云控制">
-<div class="control-head"><div class="brand"><div class="logo" aria-hidden="true"></div><div><div class="name">星云流 <span class="version">v1.5.0</span></div><div class="tag">NEBULA FLOW</div></div></div><button type="button" class="pill" id="pauseBtn" aria-label="暂停动画">Ⅱ</button></div>
+<div class="control-head"><div class="brand"><div class="logo" aria-hidden="true"></div><div><div class="name">星云流 <span class="version">v1.6.0</span></div><div class="tag">NEBULA FLOW</div></div></div><button type="button" class="pill" id="pauseBtn" aria-label="暂停动画">Ⅱ</button></div>
 <div id="status"><div id="fpsStatus">初始化中…</div><div id="coverageStatus" class="substatus">Canvas 2D</div></div>
 <div class="bottom"><div class="glass-dock" aria-label="主操作栏">
 <button type="button" class="primary accent scene-select" id="examplesBtn" aria-label="打开六个示例场景"><span class="dock-glyph">✦</span><span class="dock-current"><small>场景</small><strong id="currentScene">自然星云</strong></span><span class="chevron">›</span></button>
@@ -35,7 +35,7 @@
 <button type="button" class="tile" data-scene="orbit" style="--c1:rgba(164,94,244,.46);--c2:#d6a5ff"><strong>◎ 星环轨道</strong><small>星环弧线 · 旋转运动</small></button>
 <button type="button" class="tile" data-scene="vortex" style="--c1:rgba(63,120,238,.51);--c2:#9cbbff"><strong>◉ 旋涡风暴</strong><small>螺旋涡流 · 层次分明</small></button>
 <button type="button" class="tile" data-scene="nova" style="--c1:rgba(245,118,74,.49);--c2:#ffe0a0"><strong>✹ 超新星</strong><small>琥珀光束 · 爆发扩散</small></button>
-</div><div class="button-row"><button type="button" id="randomBtn">🎲 随机场景</button><button type="button" id="drawerTourBtn">▶ 自动巡演</button><button type="button" id="drawerSettingsBtn">⚙ 高级设置</button></div></div>
+</div><div class="button-row"><button type="button" id="randomBtn">🎲 随机场景</button><button type="button" id="drawerTourBtn">▶ 自动巡演</button><button type="button" id="drawerStatsBtn">▤ 数据统计</button><button type="button" id="drawerSettingsBtn">⚙ 高级设置</button></div></div>
 <div id="settingsPane" class="hidden"><p>简洁、流畅、兼容。仅保留必要的画面选项。</p>
 <h3>视觉与性能</h3>
 <div class="settings-line"><div><label for="density">粒子密度</label><small>可见星点数量，不会因拖尾积累成一团</small></div><input id="density" type="range" min="50" max="160" step="10" value="100"></div>
@@ -45,8 +45,28 @@
 <details class="advanced"><summary>更多选项 <span>拖尾 · 点击反馈 · 性能信息</span></summary><div class="settings-line"><div><label for="trail">拖尾长度</label><small>保留彗星尾焰；省电档也有轻量拖尾</small></div><input id="trail" type="range" min="0" max="100" step="10" value="78"></div>
 <div class="settings-line"><div><label for="waves">点击反馈</label><small>轻点一圈光波，同时推动附近粒子</small></div><input id="waves" class="toggle" type="checkbox" checked></div>
 <div class="settings-line"><div><label for="hud">性能信息</label><small>展开右侧控制卡后显示 FPS 和分布覆盖率</small></div><input id="hud" class="toggle" type="checkbox" checked></div>
-</details><h3>实用工具</h3><div class="button-row"><button type="button" id="saveBtn">▣ 保存画面 PNG</button><button type="button" id="fullBtn">⛶ 全屏展示</button><button type="button" id="resetBtn">↻ 恢复默认</button><button type="button" id="settingsExamplesBtn">✦ 返回例子</button></div>
+</details><h3>实用工具</h3><div class="button-row"><button type="button" id="saveBtn">▣ 保存画面 PNG</button><button type="button" id="fullBtn">⛶ 全屏展示</button><button type="button" id="openStatsBtn">▤ 数据统计</button><button type="button" id="resetBtn">↻ 恢复默认</button><button type="button" id="settingsExamplesBtn">✦ 返回例子</button></div>
 <div id="help"><p><b>操作提示</b>：轻点松开产生光波，按住滑动可连续拨开粒子；按空格暂停，按 1～6 切换场景，按 Esc 关闭面板。</p><p><b>兼容说明</b>：只依赖 Canvas 2D 与基础 DOM（动画定时器可回退）；没有 WebGL、网络请求或第三方库。画质与性能取决于设备，已验证环境见随包说明。</p></div></div>
+
+<div id="statsPane" class="hidden">
+<p class="stats-intro">查看星云流的使用习惯与实时渲染表现。数据仅保存在当前浏览器，不会上传。</p>
+<div class="stats-grid">
+<article class="stats-card"><span>累计活跃时间</span><strong id="statsTotalTime">0 秒</strong><small>仅统计页面可见且动画运行的时间</small></article>
+<article class="stats-card"><span>本次会话</span><strong id="statsSessionTime">0 秒</strong><small>从本次打开页面开始计算</small></article>
+<article class="stats-card"><span>访问会话</span><strong id="statsSessions">1</strong><small>当前浏览器累计打开次数</small></article>
+<article class="stats-card"><span>交互总次数</span><strong id="statsActions">0</strong><small>轻触、拖动、脉冲、切换与巡演</small></article>
+</div>
+<div class="stats-section"><div class="stats-heading"><h3>场景偏好</h3><span>按累计活跃时间</span></div><div id="statsSceneRows" class="stats-scene-rows"></div></div>
+<div class="stats-section"><div class="stats-heading"><h3>近 7 日活跃</h3><span>本地日期</span></div><div id="statsWeekBars" class="stats-week-bars"></div></div>
+<div class="stats-section"><div class="stats-heading"><h3>实时渲染性能</h3><span>本地采样</span></div><div class="stats-performance">
+<div><small>当前 FPS</small><strong id="statsCurrentFps">—</strong></div><div><small>采样平均 FPS</small><strong id="statsAverageFps">—</strong></div>
+<div><small>平均绘制耗时</small><strong id="statsRenderMs">—</strong></div><div><small>平均模拟耗时</small><strong id="statsSimMs">—</strong></div>
+<div><small>当前粒子数</small><strong id="statsParticles">—</strong></div><div><small>画布分辨率</small><strong id="statsCanvasSize">—</strong></div>
+</div></div>
+<div class="stats-section"><div class="stats-heading"><h3>交互明细</h3><span>累计次数</span></div><div id="statsInteractionRows" class="stats-interactions"></div></div>
+<div id="statsPrivacyNote" class="stats-privacy-note">本地存储 · 无账号 · 无遥测 · 可随时导出或清空</div>
+<div class="button-row stats-actions"><button type="button" id="statsExportJson">导出 JSON</button><button type="button" id="statsExportCsv">导出 CSV</button><button type="button" id="statsResetBtn">清空统计</button><button type="button" id="statsBackBtn">返回设置</button></div>
+</div>
 </div></div>
 <!--ENGINE-->
 </body>

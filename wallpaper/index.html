@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5">
 <meta name="theme-color" content="#050a16">
-<meta name="description" content="星云流 v1.5.0 · 单文件交互式粒子星空，无外部依赖。">
-<title>星云流 v1.5.0 · Nebula Flow</title>
+<meta name="description" content="星云流 v1.6.0 · 单文件交互式粒子星空，无外部依赖。">
+<title>星云流 v1.6.0 · Nebula Flow</title>
 <style>
 
 :root{color-scheme:dark;--ink:#eef7ff;--muted:#b2c4d6;--line:rgba(232,245,255,.22);--top:env(safe-area-inset-top,0px);--bottom:env(safe-area-inset-bottom,0px)}
@@ -28,7 +28,37 @@
 
 .wallpaper-mode .top,.wallpaper-mode .controls,.wallpaper-mode #copy,.wallpaper-mode #toast,.wallpaper-mode #status{display:none!important}
 
+/* v1.6.0 local analytics dashboard */
+.stats-intro{margin-bottom:12px!important}
+.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 17px}
+.stats-card{min-width:0;padding:12px;border:1px solid rgba(236,249,255,.14);border-radius:16px;background:linear-gradient(145deg,rgba(224,245,255,.09),rgba(224,245,255,.025));box-shadow:inset 0 1px rgba(255,255,255,.08)}
+.stats-card span,.stats-card small{display:block;color:#b8cbdc;font-size:10px;line-height:1.5}
+.stats-card strong{display:block;margin:6px 0 4px;font-size:clamp(17px,4vw,22px);font-weight:700;color:#eafaff;font-variant-numeric:tabular-nums}
+.stats-card small{font-size:9px;color:#9fb4c7}
+.stats-section{margin-top:18px}.stats-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.stats-heading h3{margin:0!important}.stats-heading span{font-size:9px;color:#9fb4c7}
+.stats-scene-rows{display:grid;gap:9px}.stats-scene-row{display:grid;grid-template-columns:72px minmax(0,1fr) 48px;align-items:center;gap:8px;font-size:10px}
+.stats-scene-name{color:#dceaf5;white-space:nowrap}.stats-scene-track{height:7px;overflow:hidden;border-radius:99px;background:rgba(226,244,255,.10)}
+.stats-scene-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#59c9db,#a5a5ff)}
+.stats-scene-time{text-align:right;color:#b8cbdc;font-size:9px;font-variant-numeric:tabular-nums}
+.stats-week-bars{height:94px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end;gap:7px;padding:8px 2px 0}
+.stats-day{height:86px;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}
+.stats-day-value{font-size:8px;color:#aabed0;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stats-day-track{height:56px;width:100%;display:flex;align-items:flex-end;overflow:hidden;border-radius:7px;background:rgba(226,244,255,.055)}
+.stats-day-fill{width:100%;min-height:2px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#9bdcf2,#5a7fbc)}
+.stats-day-label{font-size:9px;color:#c1d1df}
+.stats-performance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stats-performance>div{padding:10px 8px;border:1px solid rgba(236,249,255,.12);border-radius:13px;background:rgba(221,243,255,.035);min-width:0}
+.stats-performance small,.stats-performance strong{display:block}.stats-performance small{font-size:9px;color:#a9bdcf}
+.stats-performance strong{font-size:15px;margin-top:5px;color:#e7f8ff;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stats-interactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.stats-interaction{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;border-radius:12px;background:rgba(221,243,255,.045);font-size:10px;color:#bed0df}
+.stats-interaction strong{color:#e9f8ff;font-size:12px;font-variant-numeric:tabular-nums}
+.stats-privacy-note{margin-top:15px;padding:10px 11px;border:1px solid rgba(118,219,194,.18);border-radius:12px;background:rgba(84,190,158,.055);color:#b8e8dc;font-size:10px;line-height:1.7}
+@media(max-width:480px){.stats-performance{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-scene-row{grid-template-columns:66px minmax(0,1fr) 43px}.stats-grid{gap:7px}.stats-card{padding:10px}.stats-day-value{font-size:7px}}
+
 </style>
+<link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="16" fill="%23050a16"/%3E%3Cpath d="M32 8L37 27L56 32L37 37L32 56L27 37L8 32L27 27Z" fill="%2375dcff"/%3E%3C/svg%3E'>
 </head>
 <body><script>window.__NebulaWallpaper=true;</script>
 <div id="ambient" aria-hidden="true"></div>
@@ -36,7 +66,7 @@
 <div id="touchLayer" aria-hidden="true"></div>
 <div class="top"><button type="button" class="pill" id="menuBtn" aria-label="展开控制" aria-controls="controls mask" aria-expanded="false">✦</button></div>
 <div id="controls" class="controls hidden" aria-label="星云控制">
-<div class="control-head"><div class="brand"><div class="logo" aria-hidden="true"></div><div><div class="name">星云流 <span class="version">v1.5.0</span></div><div class="tag">NEBULA FLOW</div></div></div><button type="button" class="pill" id="pauseBtn" aria-label="暂停动画">Ⅱ</button></div>
+<div class="control-head"><div class="brand"><div class="logo" aria-hidden="true"></div><div><div class="name">星云流 <span class="version">v1.6.0</span></div><div class="tag">NEBULA FLOW</div></div></div><button type="button" class="pill" id="pauseBtn" aria-label="暂停动画">Ⅱ</button></div>
 <div id="status"><div id="fpsStatus">初始化中…</div><div id="coverageStatus" class="substatus">Canvas 2D</div></div>
 <div class="bottom"><div class="glass-dock" aria-label="主操作栏">
 <button type="button" class="primary accent scene-select" id="examplesBtn" aria-label="打开六个示例场景"><span class="dock-glyph">✦</span><span class="dock-current"><small>场景</small><strong id="currentScene">自然星云</strong></span><span class="chevron">›</span></button>
@@ -57,7 +87,7 @@
 <button type="button" class="tile" data-scene="orbit" style="--c1:rgba(164,94,244,.46);--c2:#d6a5ff"><strong>◎ 星环轨道</strong><small>星环弧线 · 旋转运动</small></button>
 <button type="button" class="tile" data-scene="vortex" style="--c1:rgba(63,120,238,.51);--c2:#9cbbff"><strong>◉ 旋涡风暴</strong><small>螺旋涡流 · 层次分明</small></button>
 <button type="button" class="tile" data-scene="nova" style="--c1:rgba(245,118,74,.49);--c2:#ffe0a0"><strong>✹ 超新星</strong><small>琥珀光束 · 爆发扩散</small></button>
-</div><div class="button-row"><button type="button" id="randomBtn">🎲 随机场景</button><button type="button" id="drawerTourBtn">▶ 自动巡演</button><button type="button" id="drawerSettingsBtn">⚙ 高级设置</button></div></div>
+</div><div class="button-row"><button type="button" id="randomBtn">🎲 随机场景</button><button type="button" id="drawerTourBtn">▶ 自动巡演</button><button type="button" id="drawerStatsBtn">▤ 数据统计</button><button type="button" id="drawerSettingsBtn">⚙ 高级设置</button></div></div>
 <div id="settingsPane" class="hidden"><p>简洁、流畅、兼容。仅保留必要的画面选项。</p>
 <h3>视觉与性能</h3>
 <div class="settings-line"><div><label for="density">粒子密度</label><small>可见星点数量，不会因拖尾积累成一团</small></div><input id="density" type="range" min="50" max="160" step="10" value="100"></div>
@@ -67,8 +97,28 @@
 <details class="advanced"><summary>更多选项 <span>拖尾 · 点击反馈 · 性能信息</span></summary><div class="settings-line"><div><label for="trail">拖尾长度</label><small>保留彗星尾焰；省电档也有轻量拖尾</small></div><input id="trail" type="range" min="0" max="100" step="10" value="78"></div>
 <div class="settings-line"><div><label for="waves">点击反馈</label><small>轻点一圈光波，同时推动附近粒子</small></div><input id="waves" class="toggle" type="checkbox" checked></div>
 <div class="settings-line"><div><label for="hud">性能信息</label><small>展开右侧控制卡后显示 FPS 和分布覆盖率</small></div><input id="hud" class="toggle" type="checkbox" checked></div>
-</details><h3>实用工具</h3><div class="button-row"><button type="button" id="saveBtn">▣ 保存画面 PNG</button><button type="button" id="fullBtn">⛶ 全屏展示</button><button type="button" id="resetBtn">↻ 恢复默认</button><button type="button" id="settingsExamplesBtn">✦ 返回例子</button></div>
+</details><h3>实用工具</h3><div class="button-row"><button type="button" id="saveBtn">▣ 保存画面 PNG</button><button type="button" id="fullBtn">⛶ 全屏展示</button><button type="button" id="openStatsBtn">▤ 数据统计</button><button type="button" id="resetBtn">↻ 恢复默认</button><button type="button" id="settingsExamplesBtn">✦ 返回例子</button></div>
 <div id="help"><p><b>操作提示</b>：轻点松开产生光波，按住滑动可连续拨开粒子；按空格暂停，按 1～6 切换场景，按 Esc 关闭面板。</p><p><b>兼容说明</b>：只依赖 Canvas 2D 与基础 DOM（动画定时器可回退）；没有 WebGL、网络请求或第三方库。画质与性能取决于设备，已验证环境见随包说明。</p></div></div>
+
+<div id="statsPane" class="hidden">
+<p class="stats-intro">查看星云流的使用习惯与实时渲染表现。数据仅保存在当前浏览器，不会上传。</p>
+<div class="stats-grid">
+<article class="stats-card"><span>累计活跃时间</span><strong id="statsTotalTime">0 秒</strong><small>仅统计页面可见且动画运行的时间</small></article>
+<article class="stats-card"><span>本次会话</span><strong id="statsSessionTime">0 秒</strong><small>从本次打开页面开始计算</small></article>
+<article class="stats-card"><span>访问会话</span><strong id="statsSessions">1</strong><small>当前浏览器累计打开次数</small></article>
+<article class="stats-card"><span>交互总次数</span><strong id="statsActions">0</strong><small>轻触、拖动、脉冲、切换与巡演</small></article>
+</div>
+<div class="stats-section"><div class="stats-heading"><h3>场景偏好</h3><span>按累计活跃时间</span></div><div id="statsSceneRows" class="stats-scene-rows"></div></div>
+<div class="stats-section"><div class="stats-heading"><h3>近 7 日活跃</h3><span>本地日期</span></div><div id="statsWeekBars" class="stats-week-bars"></div></div>
+<div class="stats-section"><div class="stats-heading"><h3>实时渲染性能</h3><span>本地采样</span></div><div class="stats-performance">
+<div><small>当前 FPS</small><strong id="statsCurrentFps">—</strong></div><div><small>采样平均 FPS</small><strong id="statsAverageFps">—</strong></div>
+<div><small>平均绘制耗时</small><strong id="statsRenderMs">—</strong></div><div><small>平均模拟耗时</small><strong id="statsSimMs">—</strong></div>
+<div><small>当前粒子数</small><strong id="statsParticles">—</strong></div><div><small>画布分辨率</small><strong id="statsCanvasSize">—</strong></div>
+</div></div>
+<div class="stats-section"><div class="stats-heading"><h3>交互明细</h3><span>累计次数</span></div><div id="statsInteractionRows" class="stats-interactions"></div></div>
+<div id="statsPrivacyNote" class="stats-privacy-note">本地存储 · 无账号 · 无遥测 · 可随时导出或清空</div>
+<div class="button-row stats-actions"><button type="button" id="statsExportJson">导出 JSON</button><button type="button" id="statsExportCsv">导出 CSV</button><button type="button" id="statsResetBtn">清空统计</button><button type="button" id="statsBackBtn">返回设置</button></div>
+</div>
 </div></div>
 <script>
 /* Dependency-free playback and load control, shared by browser and logic tests. */
@@ -113,17 +163,47 @@ var playback=new win.NebulaCore.PlaybackClock(),loadControl=new win.NebulaCore.Q
 var opts={};
 function copy(a){var out={},k;for(k in a)if(Object.prototype.hasOwnProperty.call(a,k))out[k]=a[k];return out;}
 function getStore(k){try{return win.localStorage.getItem(k);}catch(e){return null;}}
-function setStore(k,v){try{win.localStorage.setItem(k,v);}catch(e){}}
+function setStore(k,v){try{win.localStorage.setItem(k,v);return true;}catch(e){return false;}}
 function limit(n,a,b){return Math.max(a,Math.min(b,n));}
 function number(n,d){n=Number(n);return isFinite(n)?n:d;}
 function frac(n){return n-Math.floor(n);}
 function rnd(a){return frac(Math.sin(a*127.1+seed*19.7)*43758.5453123);}
 function load(){opts=copy(defaults);var data;try{data=JSON.parse(getStore('nebula_flow_v15_settings')||getStore('nebula_flow_v14_settings')||getStore('nebula_flow_v13_settings')||getStore('nebula_flow_v12_settings')||getStore('nebula_flow_v11_settings')||getStore('nebula_flow_v1_settings')||'null');if(!getStore('nebula_flow_v15_settings')&&!getStore('nebula_flow_v12_settings')&&!getStore('nebula_flow_v11_settings')&&data) data.hud=false;}catch(e){data=null;}if(data&&typeof data==='object'){for(var k in defaults)if(Object.prototype.hasOwnProperty.call(data,k))opts[k]=data[k];}opts.density=limit(number(opts.density,100),50,160);opts.speed=limit(number(opts.speed,100),30,170);opts.trail=limit(number(opts.trail,45),0,100);if(['auto','high','low'].indexOf(opts.quality)<0)opts.quality='auto';if(['auto','ice','purple','gold'].indexOf(opts.palette)<0)opts.palette='auto';opts.brightness=limit(number(opts.brightness,100),30,140);opts.strength=limit(number(opts.strength,100),0,200);opts.renderscale=limit(number(opts.renderscale,100),50,150);opts.colorHue=(number(opts.colorHue,190)%360+360)%360;var booleans=['waves','hud','interactive','audio','showui','parallax','customcolor'];for(var j=0;j<booleans.length;j++){var key=booleans[j];if(typeof opts[key]!=='boolean')opts[key]=defaults[key];}var s=getStore('nebula_flow_v1_scene');for(var i=0;i<SCENES.length;i++)if(SCENES[i].id===s){scene=s;sceneIndex=i;break;}}
 load();
+
+/* Local-only analytics: no network, no identifiers, browser localStorage only. */
+var statsData=null,statsThisSessionMs=0,statsLastAt=0,statsLastFlush=0,statsStorageOK=true;
+function statsBlank(){return{version:1,sessions:0,totalActiveMs:0,dailyMs:{},sceneMs:{nebula:0,aurora:0,deep:0,orbit:0,vortex:0,nova:0},interactions:{taps:0,drags:0,pulses:0,sceneSwitches:0,tours:0,randomScenes:0},performance:{samples:0,sumFps:0,minFps:0,maxFps:0,sumRenderMs:0,sumSimulationMs:0,frames:0},updatedAt:0};}
+function statsDateKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function statsLoad(){var d=statsBlank();if(hostMode)return d;var raw=getStore('nebula_flow_v16_stats'),saved=null;try{saved=raw?JSON.parse(raw):null;}catch(e){saved=null;}if(saved&&typeof saved==='object'){d.sessions=Math.max(0,number(saved.sessions,0));d.totalActiveMs=Math.max(0,number(saved.totalActiveMs,0));d.dailyMs=saved.dailyMs&&typeof saved.dailyMs==='object'?saved.dailyMs:{};d.sceneMs=Object.assign(d.sceneMs,saved.sceneMs||{});d.interactions=Object.assign(d.interactions,saved.interactions||{});d.performance=Object.assign(d.performance,saved.performance||{});d.updatedAt=Math.max(0,number(saved.updatedAt,0));}
+for(var i=0;i<SCENES.length;i++){var id=SCENES[i].id;d.sceneMs[id]=Math.max(0,number(d.sceneMs[id],0));}
+Object.keys(d.dailyMs).forEach(function(k){d.dailyMs[k]=Math.max(0,number(d.dailyMs[k],0));});
+var dates=Object.keys(d.dailyMs).sort();while(dates.length>60)delete d.dailyMs[dates.shift()];
+['taps','drags','pulses','sceneSwitches','tours','randomScenes'].forEach(function(k){d.interactions[k]=Math.max(0,number(d.interactions[k],0));});
+['samples','sumFps','minFps','maxFps','sumRenderMs','sumSimulationMs','frames'].forEach(function(k){d.performance[k]=Math.max(0,number(d.performance[k],0));});
+d.sessions++;statsLastAt=clock();statsLastFlush=statsLastAt;return d;}
+function statsDuration(ms){var s=Math.floor(Math.max(0,ms)/1000),days=Math.floor(s/86400),hours=Math.floor(s%86400/3600),mins=Math.floor(s%3600/60);if(days)return days+'天 '+hours+'小时';if(hours)return hours+'小时 '+mins+'分';if(mins)return mins+'分钟';return s+'秒';}
+function statsAccumulate(now){if(!statsData||hostMode)return;if(!statsLastAt){statsLastAt=now;return;}var delta=now-statsLastAt;statsLastAt=now;if(!isFinite(delta)||delta<=0)return;delta=Math.min(delta,10000);if(!visible||paused||hostPaused||doc.hidden||!ctx)return;statsData.totalActiveMs+=delta;statsThisSessionMs+=delta;var key=statsDateKey(new Date());statsData.dailyMs[key]=(statsData.dailyMs[key]||0)+delta;statsData.sceneMs[scene]=(statsData.sceneMs[scene]||0)+delta;}
+function statsRecord(k){if(!statsData||hostMode||!statsData.interactions)return;if(Object.prototype.hasOwnProperty.call(statsData.interactions,k))statsData.interactions[k]++;}
+function statsRecordFrame(f,renderMs,simMs){if(!statsData||hostMode)return;var p=statsData.performance;p.samples++;f=limit(number(f,0),0,240);p.sumFps+=f;if(!p.minFps||f<p.minFps)p.minFps=f;p.maxFps=Math.max(p.maxFps,f);p.sumRenderMs+=limit(number(renderMs,0),0,1000);p.sumSimulationMs+=limit(number(simMs,0),0,1000);p.frames++;}
+function statsFlush(force){if(!statsData||hostMode)return;var now=clock();statsAccumulate(now);if(!force&&now-statsLastFlush<15000)return;statsData.updatedAt=Date.now();statsStorageOK=setStore('nebula_flow_v16_stats',JSON.stringify(statsData));statsLastFlush=now;}
+function statsText(id,v){var n=el(id);if(n)n.textContent=String(v);}
+function statsUpdateUI(){if(!statsData||hostMode||!el('statsPane'))return;statsAccumulate(clock());var p=statsData.performance,it=statsData.interactions;statsText('statsTotalTime',statsDuration(statsData.totalActiveMs));statsText('statsSessionTime',statsDuration(statsThisSessionMs));statsText('statsSessions',statsData.sessions);var total=0;Object.keys(it).forEach(function(k){total+=it[k]||0;});statsText('statsActions',total);statsText('statsCurrentFps',ctx?Math.round(ema)+' FPS':'—');statsText('statsAverageFps',p.samples?(p.sumFps/p.samples).toFixed(1)+' FPS':'采集中');statsText('statsRenderMs',p.samples?(p.sumRenderMs/p.samples).toFixed(2)+' ms':'采集中');statsText('statsSimMs',p.samples?(p.sumSimulationMs/p.samples).toFixed(2)+' ms':'采集中');statsText('statsParticles',particles.length.toLocaleString('zh-CN'));statsText('statsCanvasSize',canvas.width+' × '+canvas.height);
+var root=el('statsSceneRows');if(root){root.textContent='';var sum=0;for(var i=0;i<SCENES.length;i++)sum+=statsData.sceneMs[SCENES[i].id]||0;for(i=0;i<SCENES.length;i++){var sc=SCENES[i],ms=statsData.sceneMs[sc.id]||0,row=doc.createElement('div');row.className='stats-scene-row';var name=doc.createElement('span');name.className='stats-scene-name';name.textContent=sc.name;var track=doc.createElement('div');track.className='stats-scene-track';var fill=doc.createElement('div');fill.className='stats-scene-fill';fill.style.width=(sum?ms/sum*100:0)+'%';track.appendChild(fill);var time=doc.createElement('span');time.className='stats-scene-time';time.textContent=statsDuration(ms);row.appendChild(name);row.appendChild(track);row.appendChild(time);root.appendChild(row);}}
+var week=el('statsWeekBars');if(week){week.textContent='';var days=[],max=0;for(i=6;i>=0;i--){var date=new Date();date.setHours(12,0,0,0);date.setDate(date.getDate()-i);var value=statsData.dailyMs[statsDateKey(date)]||0;days.push({date:date,value:value});max=Math.max(max,value);}days.forEach(function(item){var day=doc.createElement('div');day.className='stats-day';var top=doc.createElement('span');top.className='stats-day-value';top.textContent=item.value>=3600000?(item.value/3600000).toFixed(1)+'h':Math.round(item.value/60000)+'m';var track=doc.createElement('div');track.className='stats-day-track';var fill=doc.createElement('div');fill.className='stats-day-fill';fill.style.height=(max?Math.max(3,item.value/max*56):3)+'px';track.appendChild(fill);var label=doc.createElement('span');label.className='stats-day-label';label.textContent=(item.date.getMonth()+1)+'/'+item.date.getDate();day.appendChild(top);day.appendChild(track);day.appendChild(label);week.appendChild(day);});}
+var list=el('statsInteractionRows');if(list){list.textContent='';[['taps','轻触'],['drags','拖动'],['pulses','能量脉冲'],['sceneSwitches','场景切换'],['tours','自动巡演'],['randomScenes','随机场景']].forEach(function(pair){var row=doc.createElement('div');row.className='stats-interaction';var label=doc.createElement('span');label.textContent=pair[1];var value=doc.createElement('strong');value.textContent=it[pair[0]]||0;row.appendChild(label);row.appendChild(value);list.appendChild(row);});}
+statsText('statsPrivacyNote',statsStorageOK?'隐私：数据仅保存在当前浏览器，不上传、不跨设备同步。可导出 JSON/CSV 或清空。':'浏览器限制了本地存储；数据仅在本次页面打开期间保留。');}
+function statsSnapshot(){statsAccumulate(clock());return{product:'Nebula Flow',version:'1.6.0',exportedAt:new Date().toISOString(),privacy:'本地统计；不包含 IP、账号、设备标识或浏览记录。',currentSessionActiveMs:Math.round(statsThisSessionMs),currentScene:scene,currentPerformance:{fps:Math.round(ema),particles:particles.length,renderMs:lastRenderCost,simulationMs:lastSimulationCost},statistics:statsData};}
+function statsDownload(name,content,type){var blob=new Blob([content],{type:type}),url=win.URL.createObjectURL(blob),a=doc.createElement('a');a.href=url;a.download=name;doc.body.appendChild(a);a.click();a.remove();setTimeout(function(){win.URL.revokeObjectURL(url);},1200);}
+function statsExportJson(){statsFlush(true);statsDownload('nebula-flow-statistics-'+statsDateKey(new Date())+'.json',JSON.stringify(statsSnapshot(),null,2),'application/json;charset=utf-8');toast('统计 JSON 已导出');}
+function statsExportCsv(){statsFlush(true);var p=statsData.performance,it=statsData.interactions,rows=[['指标','数值'],['版本','1.6.0'],['累计活跃毫秒',Math.round(statsData.totalActiveMs)],['累计活跃时间',statsDuration(statsData.totalActiveMs)],['本次会话毫秒',Math.round(statsThisSessionMs)],['访问会话数',statsData.sessions],['性能样本数',p.samples],['采样平均 FPS',p.samples?(p.sumFps/p.samples).toFixed(2):''],['最低采样 FPS',p.minFps||''],['最高采样 FPS',p.maxFps||''],['平均绘制耗时 ms',p.samples?(p.sumRenderMs/p.samples).toFixed(3):''],['平均模拟耗时 ms',p.samples?(p.sumSimulationMs/p.samples).toFixed(3):'']];Object.keys(it).forEach(function(k){rows.push(['交互_'+k,it[k]]);});SCENES.forEach(function(sc){rows.push(['场景_'+sc.name+'_毫秒',Math.round(statsData.sceneMs[sc.id]||0)]);});Object.keys(statsData.dailyMs).sort().forEach(function(k){rows.push(['每日_'+k+'_毫秒',Math.round(statsData.dailyMs[k])]);});var csv='\ufeff'+rows.map(function(row){return row.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');statsDownload('nebula-flow-statistics-'+statsDateKey(new Date())+'.csv',csv,'text/csv;charset=utf-8');toast('统计 CSV 已导出');}
+function statsReset(){if(!win.confirm('确定清空本地统计数据？此操作不会影响画面设置。'))return;statsData=statsBlank();statsData.sessions=1;statsThisSessionMs=0;statsLastAt=clock();statsFlush(true);statsUpdateUI();toast('本地统计已清空');}
+
+statsData=statsLoad();
 function save(){setStore('nebula_flow_v15_settings',JSON.stringify(opts));}
 function toast(t){el('toast').textContent=t;el('toast').className='show';clearTimeout(toastTimer);toastTimer=setTimeout(function(){el('toast').className='';},1500);}
 function syncControls(){el('controls').className=controlsOpen?'controls':'controls hidden';el('menuBtn').setAttribute('aria-expanded',controlsOpen||drawer?'true':'false');el('menuBtn').setAttribute('aria-label',controlsOpen||drawer?'收起控制':'展开控制');el('menuBtn').textContent=controlsOpen||drawer?'×':'✦';}
-function setDrawer(name){if(name==='settings'&&hostMode){toast('请在 Wallpaper Engine 的属性面板调整设置');return;}var hadDrawer=!!drawer;if(name){clearTimeout(toastTimer);el('toast').className='';controlsOpen=false;}drawer=name;el('mask').className=name?'open':'';el('mask').setAttribute('aria-hidden',name?'false':'true');el('examplesPane').className=name==='examples'?'':'hidden';el('settingsPane').className=name==='settings'?'':'hidden';el('drawerTitle').textContent=name==='settings'?'设置与工具 · v1.5.0':'选择一个宇宙';syncControls();if(name)el('closeDrawer').focus();else if(initialized&&hadDrawer)el('menuBtn').focus();}
+function setDrawer(name){if((name==='settings'||name==='stats')&&hostMode){toast('请在 Wallpaper Engine 的属性面板调整设置');return;}var hadDrawer=!!drawer;if(name){clearTimeout(toastTimer);el('toast').className='';controlsOpen=false;}drawer=name;el('mask').className=name?'open':'';el('mask').setAttribute('aria-hidden',name?'false':'true');el('examplesPane').className=name==='examples'?'':'hidden';el('settingsPane').className=name==='settings'?'':'hidden';el('statsPane').className=name==='stats'?'':'hidden';el('drawerTitle').textContent=name==='settings'?'设置与工具 · v1.6.0':name==='stats'?'使用统计 · v1.6.0':'选择一个宇宙';syncControls();if(name==='stats')statsUpdateUI();if(name)el('closeDrawer').focus();else if(initialized&&hadDrawer)el('menuBtn').focus();}
 function updateBtns(){var nodes=doc.querySelectorAll('[data-scene]');for(var i=0;i<nodes.length;i++){var on=nodes[i].getAttribute('data-scene')===scene;nodes[i].setAttribute('aria-pressed',on?'true':'false');}el('currentScene').textContent=SCENES[sceneIndex].name;el('tourBtn').textContent=touring?'■ 停止':'▶ 巡演';el('tourBtn').className=touring?'primary tour-dock touring':'primary tour-dock';el('drawerTourBtn').textContent=touring?'■ 停止巡演':'▶ 自动巡演';el('tourProgress').className=touring?'progress active':'progress';}
 function densityTarget(){var areaFactor=limit(W*H/(390*820),.6,2.5);var base=opts.quality==='high'?2300:1700;var baseline=limit(base*areaFactor,400,opts.quality==='high'?4400:3000);return Math.round(Math.max(400,baseline*opts.density/100));}
 function footprint(id,i,u,v){var q=i%20,x=u,y=v,a,r;
@@ -166,11 +246,11 @@ function resize(){var prevW=W,prevH=H;
   layout(scene,!oldCount);buildBg();if(ctx)render(0,true);
 }
 
-function switchScene(id,fromTour){var i;for(i=0;i<SCENES.length;i++)if(SCENES[i].id===id)break;if(i>=SCENES.length)return;if(!fromTour)stopTour();scene=id;sceneIndex=i;layout(scene,false);setStore('nebula_flow_v1_scene',scene);updateBtns();setDrawer(null);toast('✦ '+SCENES[i].name+' · 平滑转场');el('copy').className='center-copy fade';showCopy=false;}
-function tourStart(){if(touring){stopTour();toast('巡演已停止');return;}touring=true;paused=false;el('pauseBtn').textContent='Ⅱ';el('pauseBtn').setAttribute('aria-label','暂停动画');tourAt=elapsed;restartTime();updateBtns();toast('柔和巡演已开启 · 不中断粒子流');setDrawer(null);}
+function switchScene(id,fromTour){var i;for(i=0;i<SCENES.length;i++)if(SCENES[i].id===id)break;if(i>=SCENES.length)return;if(id!==scene){statsAccumulate(clock());statsRecord('sceneSwitches');}if(!fromTour)stopTour();scene=id;sceneIndex=i;layout(scene,false);setStore('nebula_flow_v1_scene',scene);updateBtns();setDrawer(null);toast('✦ '+SCENES[i].name+' · 平滑转场');el('copy').className='center-copy fade';showCopy=false;}
+function tourStart(){if(touring){stopTour();toast('巡演已停止');return;}statsRecord('tours');touring=true;paused=false;el('pauseBtn').textContent='Ⅱ';el('pauseBtn').setAttribute('aria-label','暂停动画');tourAt=elapsed;restartTime();updateBtns();toast('柔和巡演已开启 · 不中断粒子流');setDrawer(null);}
 function stopTour(){if(!touring)return;touring=false;updateBtns();}
 function clock(){return (win.performance&&win.performance.now)?win.performance.now():Date.now();}
-function pulse(x,y,force){if(!ctx||hostPaused||paused)return;force=force||1;rings.push({x:x,y:y,t:0,max:48+force*28});if(rings.length>9)rings.shift();for(var i=0;i<particles.length;i++){var p=particles[i],dx=p.x-x,dy=p.y-y,r2=dx*dx+dy*dy;if(r2<26000&&r2>2){var d=Math.sqrt(r2),imp=(1-d/162)*Math.min(13,10*force);p.vx+=dx/d*imp;p.vy+=dy/d*imp;}}if(opts.waves){var w=doc.createElement('div');w.className='wave';w.style.left=x+'px';w.style.top=y+'px';el('touchLayer').appendChild(w);setTimeout(function(){if(w.parentNode)w.parentNode.removeChild(w);},700);}}
+function pulse(x,y,force){if(!ctx||hostPaused||paused)return;statsRecord('pulses');force=force||1;rings.push({x:x,y:y,t:0,max:48+force*28});if(rings.length>9)rings.shift();for(var i=0;i<particles.length;i++){var p=particles[i],dx=p.x-x,dy=p.y-y,r2=dx*dx+dy*dy;if(r2<26000&&r2>2){var d=Math.sqrt(r2),imp=(1-d/162)*Math.min(13,10*force);p.vx+=dx/d*imp;p.vy+=dy/d*imp;}}if(opts.waves){var w=doc.createElement('div');w.className='wave';w.style.left=x+'px';w.style.top=y+'px';el('touchLayer').appendChild(w);setTimeout(function(){if(w.parentNode)w.parentNode.removeChild(w);},700);}}
 function pointerPoint(e){var r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
 function down(x,y){if(!opts.interactive||hostPaused||paused||mouseDown)return;stopTour();canvas.focus();mouseDown=true;pointerX=x;pointerY=y;dragSession={x:x,y:y,startX:x,startY:y,downAt:clock(),dragged:false};el('copy').className='center-copy fade';}
 function applyDrag(x0,y0,x1,y1){if(!opts.interactive||hostPaused||paused)return;var sx=x1-x0,sy=y1-y0,dist=Math.sqrt(sx*sx+sy*sy);if(dist<.5)return;
@@ -194,12 +274,12 @@ function applyDrag(x0,y0,x1,y1){if(!opts.interactive||hostPaused||paused)return;
 }
 
 function move(x,y){if(!mouseDown||!dragSession)return;var s=dragSession,dx=x-s.x,dy=y-s.y;pointerX=x;pointerY=y;
-  if(!s.dragged&&Math.sqrt((x-s.startX)*(x-s.startX)+(y-s.startY)*(y-s.startY))>=9){s.dragged=true;dragCount++;}
+  if(!s.dragged&&Math.sqrt((x-s.startX)*(x-s.startX)+(y-s.startY)*(y-s.startY))>=9){s.dragged=true;dragCount++;statsRecord('drags');}
   if(s.dragged){var distance=Math.sqrt(dx*dx+dy*dy),steps=Math.min(8,Math.max(1,Math.ceil(distance/22)));for(var j=1;j<=steps;j++){var ax=s.x+dx*(j-1)/steps,ay=s.y+dy*(j-1)/steps,bx=s.x+dx*j/steps,by=s.y+dy*j/steps;applyDrag(ax,ay,bx,by);}}
   s.x=x;s.y=y;
 }
 function endInput(cancel,x,y){if(!mouseDown||!dragSession)return;var s=dragSession;if(typeof x==='number'&&typeof y==='number')move(x,y);mouseDown=false;dragSession=null;
-  if(!cancel&&!s.dragged&&clock()-s.downAt<500){tapCount++;pulse(s.x,s.y,1);}
+  if(!cancel&&!s.dragged&&clock()-s.downAt<500){tapCount++;statsRecord('taps');pulse(s.x,s.y,1);}
 }
 function attachInputs(){if(win.PointerEvent){canvas.addEventListener('pointerdown',function(e){if(mouseDown||e.isPrimary===false||e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();var p=pointerPoint(e);activePointer=e.pointerId;down(p.x,p.y);try{if(canvas.setPointerCapture)canvas.setPointerCapture(e.pointerId);}catch(ignore){}});
   canvas.addEventListener('pointermove',function(e){if(opts.parallax){var hover=pointerPoint(e);pointerX=hover.x;pointerY=hover.y;}if(!mouseDown||e.pointerId!==activePointer)return;e.preventDefault();var evs=typeof e.getCoalescedEvents==='function'?e.getCoalescedEvents():null;if(evs&&evs.length){for(var i=Math.max(0,evs.length-12);i<evs.length;i++){var cp=pointerPoint(evs[i]);move(cp.x,cp.y);}}var p=pointerPoint(e);move(p.x,p.y);});
@@ -289,7 +369,7 @@ function tick(now){raf=0;if(!visible||!ctx||paused||hostPaused)return;raf=nextFr
   if(!frame.draw)return;t=clock();
   if(touring){var progress=(elapsed-tourAt)/tourPeriod;if(progress>=1){tourAt=elapsed;switchScene(SCENES[(sceneIndex+1)%SCENES.length].id,true);progress=0;}el('tourProgress').style.transform='scaleX('+limit(progress,0,1)+')';}
   try{render(frame.drawMs,false,frame.alpha);}catch(error){paused=true;stopLoop();el('fallbackText').className='no-canvas';el('fallbackText').textContent='动画已暂停：'+error.message;return;}
-  lastRenderCost=clock()-t;frameNumber++;fps=1000/Math.max(1,frame.drawMs);ema=1000/((1000/ema)*.92+frame.drawMs*.08);
+  lastRenderCost=clock()-t;frameNumber++;fps=1000/Math.max(1,frame.drawMs);ema=1000/((1000/ema)*.92+frame.drawMs*.08);statsRecordFrame(ema,lastRenderCost,lastSimulationCost);
   if(opts.quality==='auto'){
     /* Measure the configured workload cycle, not the slower observed draw cycle.
        Simulation accumulated across missed draws is normalized separately; a
@@ -298,18 +378,19 @@ function tick(now){raf=0;if(!visible||!ctx||paused||hostPaused)return;raf=nextFr
     var normalizedCost=(lastRenderCost+simulationCostSinceDraw*Math.min(1,targetPeriod/Math.max(1,frame.drawMs)))*Math.min(1,(1000/60)/targetPeriod);
     if(loadControl.observe(normalizedCost,targetPeriod,frame.drawMs)){qualityStep=loadControl.level;resize();}
   }
-  simulationCostSinceDraw=0;if(opts.hud&&elapsed-lastHudAt>=250){lastHudAt=elapsed;el('fpsStatus').textContent=Math.round(ema)+' FPS · 2D '+(opts.quality==='low'?'省电':opts.quality==='high'?'高清':'自动');}
+  simulationCostSinceDraw=0;statsAccumulate(clock());if(opts.hud&&elapsed-lastHudAt>=250){lastHudAt=elapsed;el('fpsStatus').textContent=Math.round(ema)+' FPS · 2D '+(opts.quality==='low'?'省电':opts.quality==='high'?'高清':'自动');}
 }
 function stopLoop(){if(raf){cancelFrame(raf);raf=0;}}
 function restartTime(){last=0;playback.reset();simulationCostSinceDraw=0;if(!visible||paused||hostPaused){stopLoop();return;}if(ctx&&!raf)raf=nextFrame(tick);}
 function setQuality(){resize();restartTime();}
-function bind(){var all=doc.querySelectorAll('[data-scene]');for(var i=0;i<all.length;i++)(function(button){button.addEventListener('click',function(){switchScene(button.getAttribute('data-scene'),false);});})(all[i]);el('examplesBtn').addEventListener('click',function(){setDrawer('examples');});el('menuBtn').addEventListener('click',function(){var open=!(controlsOpen||drawer);setDrawer(null);controlsOpen=open;syncControls();});el('settingsBtn').addEventListener('click',function(){setDrawer('settings');});el('closeDrawer').addEventListener('click',function(){setDrawer(null);});el('mask').addEventListener('click',function(e){if(e.target===this)setDrawer(null);});el('drawerSettingsBtn').addEventListener('click',function(){setDrawer('settings');});el('settingsExamplesBtn').addEventListener('click',function(){setDrawer('examples');});el('tourBtn').addEventListener('click',tourStart);el('drawerTourBtn').addEventListener('click',tourStart);el('pauseBtn').addEventListener('click',function(){paused=!paused;if(!paused&&ctx)el('fallbackText').className='no-canvas hidden';this.textContent=paused?'▶':'Ⅱ';this.setAttribute('aria-label',paused?'继续动画':'暂停动画');stopTour();restartTime();toast(paused?'动画已暂停':'动画已继续');});el('pulseBtn').addEventListener('click',function(){pulse(W*.5,H*.48,2);setDrawer(null);toast('能量脉冲已释放');});el('randomBtn').addEventListener('click',function(){switchScene(SCENES[Math.floor(Math.random()*SCENES.length)].id,false);});
+function bind(){var all=doc.querySelectorAll('[data-scene]');for(var i=0;i<all.length;i++)(function(button){button.addEventListener('click',function(){switchScene(button.getAttribute('data-scene'),false);});})(all[i]);el('examplesBtn').addEventListener('click',function(){setDrawer('examples');});el('menuBtn').addEventListener('click',function(){var open=!(controlsOpen||drawer);setDrawer(null);controlsOpen=open;syncControls();});el('settingsBtn').addEventListener('click',function(){setDrawer('settings');});el('closeDrawer').addEventListener('click',function(){setDrawer(null);});el('mask').addEventListener('click',function(e){if(e.target===this)setDrawer(null);});el('drawerSettingsBtn').addEventListener('click',function(){setDrawer('settings');});el('drawerStatsBtn').addEventListener('click',function(){setDrawer('stats');});el('openStatsBtn').addEventListener('click',function(){setDrawer('stats');});el('statsBackBtn').addEventListener('click',function(){setDrawer('settings');});el('statsExportJson').addEventListener('click',statsExportJson);el('statsExportCsv').addEventListener('click',statsExportCsv);el('statsResetBtn').addEventListener('click',statsReset);el('settingsExamplesBtn').addEventListener('click',function(){setDrawer('examples');});el('tourBtn').addEventListener('click',tourStart);el('drawerTourBtn').addEventListener('click',tourStart);el('pauseBtn').addEventListener('click',function(){statsAccumulate(clock());paused=!paused;statsLastAt=clock();if(!paused&&ctx)el('fallbackText').className='no-canvas hidden';this.textContent=paused?'▶':'Ⅱ';this.setAttribute('aria-label',paused?'继续动画':'暂停动画');stopTour();restartTime();toast(paused?'动画已暂停':'动画已继续');});el('pulseBtn').addEventListener('click',function(){pulse(W*.5,H*.48,2);setDrawer(null);toast('能量脉冲已释放');});el('randomBtn').addEventListener('click',function(){statsRecord('randomScenes');switchScene(SCENES[Math.floor(Math.random()*SCENES.length)].id,false);});
   var keys=['density','speed','trail','quality','palette','waves','hud'];for(i=0;i<keys.length;i++)(function(k){var ctrl=el(k);ctrl.addEventListener(k==='waves'||k==='hud'||k==='quality'||k==='palette'?'change':'input',function(){opts[k]=this.type==='checkbox'?this.checked:this.type==='range'?Number(this.value):this.value;save();if(k==='density'||k==='quality'){if(k==='density')layout(scene,false);else setQuality();}if(k==='hud'){el('status').style.display=opts.hud?'':'none';lastHudAt=-250;}});})(keys[i]);
-  el('saveBtn').addEventListener('click',function(){if(!ctx){toast('当前浏览器不支持画面保存');return;}try{var a=doc.createElement('a');a.download='nebula-flow-v1.5.0-'+Date.now()+'.png';a.href=canvas.toDataURL('image/png');a.click();toast('已生成 PNG 截图');}catch(e){toast('当前浏览器不支持图片下载');}});
+  el('saveBtn').addEventListener('click',function(){if(!ctx){toast('当前浏览器不支持画面保存');return;}try{var a=doc.createElement('a');a.download='nebula-flow-v1.6.0-'+Date.now()+'.png';a.href=canvas.toDataURL('image/png');a.click();toast('已生成 PNG 截图');}catch(e){toast('当前浏览器不支持图片下载');}});
   el('fullBtn').addEventListener('click',function(){var fn=doc.documentElement.requestFullscreen||doc.documentElement.webkitRequestFullscreen;if(!fn){toast('当前浏览器暂不支持全屏');return;}try{var r=fn.call(doc.documentElement);if(r&&r.catch)r.catch(function(){toast('浏览器未允许全屏');});}catch(e){toast('浏览器未允许全屏');}});
   el('resetBtn').addEventListener('click',function(){opts=copy(defaults);stopTour();seed+=.1;for(var j=0;j<keys.length;j++){var id=keys[j],v=el(id);if(v.type==='checkbox')v.checked=opts[id];else v.value=opts[id];}save();qualityStep=1;loadControl=new win.NebulaCore.QualityController();resize();switchScene('nebula',false);el('status').style.display=opts.hud?'':'none';applyPresentation();toast('设置已恢复默认');});
-  win.addEventListener('blur',function(){endInput(true);if(activePointer!==null){try{canvas.releasePointerCapture(activePointer);}catch(ignore){}activePointer=null;}});win.addEventListener('resize',function(){resize();restartTime();});if(win.visualViewport&&win.visualViewport.addEventListener){win.visualViewport.addEventListener('resize',function(){resize();restartTime();});}doc.addEventListener('visibilitychange',function(){visible=!doc.hidden;restartTime();});win.addEventListener('keydown',function(e){if(e.key==='Escape'){controlsOpen=false;setDrawer(null);return;}if(drawer||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;if(e.key===' '||e.key==='Spacebar'){if(/BUTTON|SUMMARY/.test(e.target.tagName))return;e.preventDefault();el('pauseBtn').click();}var n=Number(e.key);if(n>=1&&n<=6)switchScene(SCENES[n-1].id,false);});attachInputs();}
-function start(){var keys=['density','speed','trail','quality','palette','waves','hud'];for(var i=0;i<keys.length;i++){var c=el(keys[i]);if(c.type==='checkbox')c.checked=opts[keys[i]];else c.value=opts[keys[i]];}el('status').style.display=opts.hud?'':'none';updateBtns();bind();initialized=true;applyPresentation();if(pendingHostProperties){var initialProperties=pendingHostProperties;pendingHostProperties=null;win.wallpaperPropertyListener.applyUserProperties(initialProperties,true);}if(ctx){resize();el('coverageStatus').textContent='星点引擎就绪';restartTime();setTimeout(function(){if(showCopy){el('copy').className='center-copy fade';showCopy=false;}},2400);}else{el('fpsStatus').textContent='此浏览器不支持 Canvas';}win.__NebulaDebug={state:function(){return{build:'1.5.0',scene:scene,particles:particles.length,drawn:drawn,fps:Math.round(ema),coverage:coverage,paused:paused,touring:touring,canvasWidth:canvas.width,canvasHeight:canvas.height,logicalWidth:W,logicalHeight:H,quality:opts.quality,options:copy(opts),pointer:{x:pointerX,y:pointerY},hostMode:hostMode,hostPaused:hostPaused,targetFPS:hostFPS,hostEvents:copy(hostEvents),qualityLevel:loadControl.level,frames:frameNumber,simulationSteps:simulationSteps,tails:tailCount,renderCost:lastRenderCost,simulationCost:lastSimulationCost,audioLevel:audioLevel,elapsed:Math.round(elapsed),frameScheduled:!!raf,backgroundCached:!!bgLayer,gesture:{taps:tapCount,drags:dragCount,impulses:dragImpulseCount,active:mouseDown,strokes:dragMarks.length}};},sample:function(){return particles.slice(0,64).map(function(p){return{x:p.x,y:p.y,vx:p.vx,vy:p.vy};});},audio:receiveAudio,select:function(id){switchScene(id,false);},tour:tourStart,pulse:pulse,reset:function(){el('resetBtn').click();}};}
+  win.addEventListener('blur',function(){statsAccumulate(clock());statsFlush(true);endInput(true);if(activePointer!==null){try{canvas.releasePointerCapture(activePointer);}catch(ignore){}activePointer=null;}});win.addEventListener('resize',function(){resize();restartTime();});if(win.visualViewport&&win.visualViewport.addEventListener){win.visualViewport.addEventListener('resize',function(){resize();restartTime();});}doc.addEventListener('visibilitychange',function(){statsAccumulate(clock());visible=!doc.hidden;statsLastAt=clock();statsFlush(true);restartTime();});win.addEventListener('keydown',function(e){if(e.key==='Escape'){controlsOpen=false;setDrawer(null);return;}if(drawer||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;if(e.key===' '||e.key==='Spacebar'){if(/BUTTON|SUMMARY/.test(e.target.tagName))return;e.preventDefault();el('pauseBtn').click();}var n=Number(e.key);if(n>=1&&n<=6)switchScene(SCENES[n-1].id,false);});attachInputs();}
+function start(){var keys=['density','speed','trail','quality','palette','waves','hud'];for(var i=0;i<keys.length;i++){var c=el(keys[i]);if(c.type==='checkbox')c.checked=opts[keys[i]];else c.value=opts[keys[i]];}el('status').style.display=opts.hud?'':'none';updateBtns();bind();initialized=true;applyPresentation();if(pendingHostProperties){var initialProperties=pendingHostProperties;pendingHostProperties=null;win.wallpaperPropertyListener.applyUserProperties(initialProperties,true);}if(ctx){resize();el('coverageStatus').textContent='星点引擎就绪';restartTime();setTimeout(function(){if(showCopy){el('copy').className='center-copy fade';showCopy=false;}},2400);}else{el('fpsStatus').textContent='此浏览器不支持 Canvas';}if(!hostMode){statsLastAt=clock();win.setInterval(function(){statsAccumulate(clock());statsFlush(false);if(drawer==='stats')statsUpdateUI();},10000);win.addEventListener('pagehide',function(){statsAccumulate(clock());statsFlush(true);});}
+  win.__NebulaDebug={state:function(){return{build:'1.6.0',scene:scene,particles:particles.length,drawn:drawn,fps:Math.round(ema),coverage:coverage,paused:paused,touring:touring,canvasWidth:canvas.width,canvasHeight:canvas.height,logicalWidth:W,logicalHeight:H,quality:opts.quality,options:copy(opts),pointer:{x:pointerX,y:pointerY},hostMode:hostMode,hostPaused:hostPaused,targetFPS:hostFPS,hostEvents:copy(hostEvents),qualityLevel:loadControl.level,frames:frameNumber,simulationSteps:simulationSteps,tails:tailCount,renderCost:lastRenderCost,simulationCost:lastSimulationCost,audioLevel:audioLevel,elapsed:Math.round(elapsed),frameScheduled:!!raf,backgroundCached:!!bgLayer,gesture:{taps:tapCount,drags:dragCount,impulses:dragImpulseCount,active:mouseDown,strokes:dragMarks.length}};},sample:function(){return particles.slice(0,64).map(function(p){return{x:p.x,y:p.y,vx:p.vx,vy:p.vy};});},audio:receiveAudio,select:function(id){switchScene(id,false);},tour:tourStart,pulse:pulse,reset:function(){el('resetBtn').click();}};}
 /* Wallpaper Engine callbacks are installed synchronously, outside load events. */
 function applyPresentation(){doc.body.className=hostMode&&!opts.showui?'wallpaper-mode':'';canvas.style.filter=opts.brightness===100?'none':'brightness('+opts.brightness/100+')';if(hostMode&&!opts.showui){controlsOpen=false;setDrawer(null);}}
 function receiveAudio(samples){if(!opts.audio||!samples||typeof samples.length!=='number'){audioTarget=0;return;}var n=0,total=0;for(var i=0;i<16;i++){var a=Number(samples[i]),b=Number(samples[i+64]);if(isFinite(a)){total+=limit(a,0,1);n++;}if(isFinite(b)){total+=limit(b,0,1);n++;}}audioTarget=n?limit(total/n,0,1):0;}
@@ -328,7 +409,7 @@ win.wallpaperPropertyListener={
    var controls=['speed','density','trail','quality','palette'];for(i=0;i<controls.length;i++){k=controls[i];el(k).value=opts[k];}}
   applyPresentation();enableAudio();save();
  },
- setPaused:function(value){hostEvents.pause++;hostPaused=value===true;endInput(true);activePointer=null;restartTime();}
+ setPaused:function(value){statsAccumulate(clock());hostEvents.pause++;hostPaused=value===true;statsLastAt=clock();endInput(true);activePointer=null;restartTime();}
 };
 enableAudio();
 
