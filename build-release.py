@@ -8,7 +8,7 @@ for directory in ['src','wallpaper','web','itch','docs','evidence']:
 ICON='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="16" fill="%23050a16"/%3E%3Cpath d="M32 8L37 27L56 32L37 37L32 56L27 37L8 32L27 27Z" fill="%2375dcff"/%3E%3C/svg%3E'
 html=(ROOT/'src/template.html').read_text(encoding='utf-8').replace('<!--STYLE-->','<style>\n'+(ROOT/'src/style.css').read_text(encoding='utf-8')+'\n</style>').replace('<!--ENGINE-->','<script>\n'+(ROOT/'src/core.js').read_text(encoding='utf-8')+'\n'+(ROOT/'src/engine.js').read_text(encoding='utf-8')+'\n</script>')
 (ROOT/'wallpaper/index.html').write_text(html.replace('<body>','<body><script>window.__NebulaWallpaper=true;</script>'),encoding='utf-8')
-assert 'v1.6.0' in (ROOT/'wallpaper/index.html').read_text(encoding='utf-8') and 'statsPane' in (ROOT/'wallpaper/index.html').read_text(encoding='utf-8')
+assert 'v1.6.0' in (ROOT/'wallpaper/index.html').read_text(encoding='utf-8') and 'statsPane' in (ROOT/'wallpaper/index.html').read_text(encoding='utf-8') and 'statsParticlePeak' in (ROOT/'wallpaper/index.html').read_text(encoding='utf-8')
 html=html.replace('</head>','<link rel="icon" href=\''+ICON+'\'>\n</head>')
 for target in ['web/index.html','itch/index.html','index.html']:
     (ROOT/target).write_text(html,encoding='utf-8')
